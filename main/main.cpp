@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     if ((it = params.find("-initialization")) != params.end())
         Hex::Params::initialization = boost::lexical_cast<unsigned>(it->second);
     if ((it = params.find("-tree_pattern")) != params.end())
-		Hex::Params::treePatternWeight = boost::lexical_cast<double>(it->second);
+        Hex::Params::treePatternWeight = boost::lexical_cast<double>(it->second);
 
     Hex::Protocol protocol;
     protocol.Run(std::cin, std::cout);

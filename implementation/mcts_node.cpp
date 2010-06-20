@@ -86,7 +86,7 @@ float MCTSNode::GetValue(const Board& board) const {
         if (Switches::PathAmaf())
             value += path.GetValue() * GetAmafWeight();
         if (Switches::TreePatterns())
-        	value += board.GetPatternGamma(loc.GetPos()) * GetTreePatternWeight();
+            value += board.GetPatternGamma(loc.GetPos()) * GetTreePatternWeight();
     }
     return value;
 }
@@ -135,8 +135,8 @@ float MCTSNode::GetAmafWeight() const {
 }
 
 float MCTSNode::GetTreePatternWeight() const {
-	ASSERT(Switches::TreePatterns());
-	return Params::treePatternWeight * InverseSqrt(ucb.GetPlayed());
+    ASSERT(Switches::TreePatterns());
+    return Params::treePatternWeight * InverseSqrt(ucb.GetPlayed());
 }
 
 bool MCTSNode::IsLeaf() const {

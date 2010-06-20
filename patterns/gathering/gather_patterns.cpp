@@ -71,17 +71,17 @@ struct SimpleStatsComputer{
         const uint *existing_patterns_end = existing_patterns + n_existing_patterns;
         while (existing_patterns != existing_patterns_end){
             if (!*played_positions){
-            	uint pattern = *existing_patterns;
+                uint pattern = *existing_patterns;
                 occurences[pattern]++;
                 //the important part: outputting all patterns present
-				std::cerr << " " << pattern;
+                std::cerr << " " << pattern;
 
             }
             ++existing_patterns;
             ++played_positions;
         }
 
-			std::cerr << std::endl;
+            std::cerr << std::endl;
     }
 
     void print(std::ostream &out){

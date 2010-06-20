@@ -61,8 +61,8 @@ class Switches {
         }
 
         static bool TreePatterns() {
-			return treePatternsOn;
-		}
+            return treePatternsOn;
+        }
 
         static void SetHacks(bool b) {
             SetSwitch("Hacks", hacksOn, b);
@@ -121,8 +121,8 @@ class Switches {
         }
 
         static void SetTreePatterns(bool b) {
-			SetSwitch("Patterns in tree", treePatternsOn, b);
-		}
+            SetSwitch("Patterns in tree", treePatternsOn, b);
+        }
 
     private:
         static SWITCH_TYPE hacksOn;

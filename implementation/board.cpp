@@ -59,8 +59,8 @@ bool Board::OppPlayer(ushort val, ushort val2) {
 }
 
 double Board::GetPatternGamma(uint pos) const {
-	ASSERT(Switches::PatternsUsed() || Switches::TreePatterns());
-	return sampler.GetGamma(pos);
+    ASSERT(Switches::PatternsUsed() || Switches::TreePatterns());
+    return sampler.GetGamma(pos);
 }
 
 const Board Board::Empty() {
@@ -565,7 +565,7 @@ void Board::PlayLegal(const Move& move) {
     ASSERT(IsValidMove(move));
 
     if (Switches::PatternsUsed() || Switches::TreePatterns())
-    	sampler.Play(move);
+        sampler.Play(move);
 
     current = current.Opponent();
     uint pos = move.GetLocation().GetPos();
