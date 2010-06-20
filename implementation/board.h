@@ -40,6 +40,7 @@ class Board {
         std::string ToAsciiArt(Location last_move) const;
         void Show() const;
         bool IsValidMove(const Move& move) const;
+        double GetPatternGamma(uint pos) const;
 
     private:
         /**

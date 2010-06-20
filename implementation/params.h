@@ -11,6 +11,7 @@ public:
     static unsigned initialization;
     static unsigned bridgeWeight;
     static double resources_part;
+    static double treePatternWeight;
 };
 
 } // namespace Hex

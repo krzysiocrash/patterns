@@ -30,7 +30,7 @@ class MCTSNode {
         /**
          * @return The child node for the optimal exploration move.
          */
-        MCTSNode* SelectChild() const;
+        MCTSNode* SelectChild(const Board& board) const;
 
         /**
          * @in @param pos A position on the board. Must be empty.
@@ -88,7 +88,7 @@ class MCTSNode {
          * computed fields and indirectly through memoiziation used in the
          * Statistics class.
          */
-        float GetValue() const;
+        float GetValue(const Board& board) const;
 
         /**
          * @return The current move final assessment.
@@ -113,6 +113,8 @@ class MCTSNode {
          * used for regular AMAF variant.
          */
         float GetAmafWeight() const;
+
+        float GetTreePatternWeight() const;
 
         void RecursivePrint(std::ostream& stream, uint max_children, uint max_level, uint level, Player player) const;
 

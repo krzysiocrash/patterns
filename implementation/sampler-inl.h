@@ -35,6 +35,11 @@ inline double Sampler::GetSum() const
     return all_sum;
 }
 
+inline double Sampler::GetGamma(uint position) const
+{
+    return gammas[position];
+}
+
 inline HexPatterns::Hash Sampler::GetHash(uint position) const
 {
     return hash_board.GetHash(position);

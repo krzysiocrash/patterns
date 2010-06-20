@@ -45,6 +45,7 @@ namespace Hex
             uint RandomMove() const;
 
             double GetSum() const;
+            double GetGamma(uint position) const;
 
             HexPatterns::Hash GetHash(uint position) const;
             void GetPlayableHashes(std::vector<HexPatterns::Hash> &out) const;

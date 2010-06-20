@@ -39,7 +39,7 @@ Move MCTSTree::BestMove(const Board& board) {
 
     nodes[0] = root.GetPointer();
 
-    // TODO: If we really want this option than implement it properly.
+    // TODO: If we really want this option then implement it properly.
     // if (max_depth == 0)
     //     node = root->GetChild(Rand::next_rand(brd.MovesLeft()));
 
@@ -50,7 +50,7 @@ Move MCTSTree::BestMove(const Board& board) {
         node = root.GetPointer();
         brd.Load(board);
         while (!node->IsLeaf()) {
-            node = node->SelectChild();
+            node = node->SelectChild(brd);
             ASSERT(brd.CurrentPlayer() == node->GetPlayer());
             Move move = node->GetMove();
             brd.PlayLegal(move);
@@ -63,7 +63,7 @@ Move MCTSTree::BestMove(const Board& board) {
         if (level < max_depth && node->GetPlayed() >= visits_to_expand
                               && brd.MovesLeft() > 0) {
             node->Expand(brd);
-            node = node->SelectChild();
+            node = node->SelectChild(brd);
             ASSERT(brd.CurrentPlayer() == node->GetPlayer());
             Move move = node->GetMove();
             brd.PlayLegal(move);

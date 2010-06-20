@@ -60,6 +60,10 @@ class Switches {
             return allShortestOn;
         }
 
+        static bool TreePatterns() {
+			return treePatternsOn;
+		}
+
         static void SetHacks(bool b) {
             SetSwitch("Hacks", hacksOn, b);
         }
@@ -116,6 +120,10 @@ class Switches {
             }
         }
 
+        static void SetTreePatterns(bool b) {
+			SetSwitch("Patterns in tree", treePatternsOn, b);
+		}
+
     private:
         static SWITCH_TYPE hacksOn;
         static SWITCH_TYPE avoidingBridgesOn;
@@ -128,6 +136,7 @@ class Switches {
         static SWITCH_TYPE floodFillOn;
         static SWITCH_TYPE singleShortestOn;
         static SWITCH_TYPE allShortestOn;
+        static SWITCH_TYPE treePatternsOn;
 
         static void SetSwitch(const std::string& name, bool& value, bool newValue) {
 

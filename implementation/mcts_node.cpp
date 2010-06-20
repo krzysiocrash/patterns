@@ -40,14 +40,14 @@ MCTSNode* MCTSNode::SelectBestChild() const {
     return best;
 }
 
-MCTSNode* MCTSNode::SelectChild() const {
+MCTSNode* MCTSNode::SelectChild(const Board& board) const {
 
     ASSERT(count > 0);
 
     MCTSNode* best = &children[0];
-    float best_val = best->GetValue();
+    float best_val = best->GetValue(board);
     for (uint i = 1; i < count; ++i) {
-        float val = children[i].GetValue();
+        float val = children[i].GetValue(board);
         if (val > best_val) {
             best = &children[i];
             best_val = val;
@@ -75,7 +75,7 @@ Move MCTSNode::GetMove() const {
     return Move(GetPlayer(), loc);
 }
 
-float MCTSNode::GetValue() const {
+float MCTSNode::GetValue(const Board& board) const {
     if (!computed) {
         computed = true;
         value = ucb.GetValue() * GetUcbWeight();
@@ -85,6 +85,8 @@ float MCTSNode::GetValue() const {
             value += path.GetValue() * GetRaveWeight();
         if (Switches::PathAmaf())
             value += path.GetValue() * GetAmafWeight();
+        if (Switches::TreePatterns())
+        	value += board.GetPatternGamma(loc.GetPos()) * GetTreePatternWeight();
     }
     return value;
 }
@@ -130,6 +132,11 @@ float MCTSNode::GetAmafWeight() const {
     if (Switches::PathRave() || Switches::Rave())
         r *= 1.0f - Params::gamma;
     return r;
+}
+
+float MCTSNode::GetTreePatternWeight() const {
+	ASSERT(Switches::TreePatterns());
+	return Params::treePatternWeight * InverseSqrt(ucb.GetPlayed());
 }
 
 bool MCTSNode::IsLeaf() const {
@@ -187,6 +194,7 @@ void MCTSNode::ToAsciiArt(std::ostream& stream, uint max_children, uint max_leve
 void MCTSNode::RecursivePrint(std::ostream& stream, uint max_children, uint max_level, uint level, Player player) const {
 
     ASSERT (IsLeaf() || count > 0);
+    Board board = Board::Empty(); // TODO pass real board
 
     if (max_level == 0)
         return;
@@ -205,14 +213,14 @@ void MCTSNode::RecursivePrint(std::ostream& stream, uint max_children, uint max_
     }
 
     if (GetPlayer() == player) {
-        stream << "ev: " << 1.0f - GetValue() << " mu: " << 1.0f - ucb.GetMu();
+        stream << "ev: " << 1.0f - GetValue(board) << " mu: " << 1.0f - ucb.GetMu();
         stream << " won: " << 1.0f - ucb.GetMu() * 100.0f << "%";
         if (Switches::Rave())
             stream << " rave: " << 1.0f - rave.GetMu();
         if (Switches::PathAmaf())
             stream << " path: " << 1.0f - path.GetMu();
     } else {
-        stream << "ev: " << GetValue() << " mu: " << ucb.GetMu();
+        stream << "ev: " << GetValue(board) << " mu: " << ucb.GetMu();
         stream << " won: " << ucb.GetMu() * 100.0f << "%";\
         if (Switches::Rave())
             stream << " rave: " << rave.GetMu();
