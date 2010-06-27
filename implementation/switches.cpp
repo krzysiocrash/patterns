@@ -13,6 +13,6 @@ SWITCH_TYPE Switches::pathRaveOn = false;
 SWITCH_TYPE Switches::floodFillOn = false;
 SWITCH_TYPE Switches::singleShortestOn = false;
 SWITCH_TYPE Switches::allShortestOn = false;
-SWITCH_TYPE Switches::treePatternsOn = true;
+SWITCH_TYPE Switches::treePatternsOn = false;
 
 }

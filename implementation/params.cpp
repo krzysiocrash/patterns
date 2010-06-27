@@ -8,6 +8,6 @@ float Params::gamma = 0.5;
 unsigned Params::initialization = 1;
 unsigned Params::bridgeWeight = 128;
 double Params::resources_part = 0.09;
-double Params::treePatternWeight = 1.0;
+double Params::treePatternWeight = 0.1;
 
 }
